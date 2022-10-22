@@ -30,7 +30,7 @@ override.tf.json
 terraform.rc
 
 # Ignore tf lock file for remote modules
-.terraform.lock.hcl
+# .terraform.lock.hcl
 
 # End of https://www.toptal.com/developers/gitignore/api/terraform
 
