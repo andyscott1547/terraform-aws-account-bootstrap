@@ -68,29 +68,123 @@ All resources are optional but by default this module will enable:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| access_analyzer_enabled | Boolean to enable/disable AWS Access Analyzer | `Bool` | `true` | no |
-| account_level_security_hub_enabled | Boolean to enable/disable Security Hub at an account level | `Bool` | `true` | no |
-| allow_users_to_change_password | Boolean to enable/disable IAM users to change their own password | `Bool` | `true` | no |
-| block_public_access_enabled | Boolean to enable/disable S3 block public access | `Bool` | `true` | no |
-| ebs_encryption_enabled | Boolean to enable/disable EBS encryption | `Bool` | `true` | no |
-| guardduty_enabled | Boolean to enable/disable GuardDuty | `Bool` | `true` | no |
-| hard_expiry | Boolean to enable/disable IAM password policy hard expiry | `Bool` | `true` | no |
-| macie_enabled | Boolean to enable/disable Macie | `Bool` | `true` | no |
+| access_analyzer_enabled | Boolean to enable/disable AWS Access Analyzer | `bool` | `true` | no |
+| account_level_security_hub_enabled | Boolean to enable/disable Security Hub at an account level | `bool` | `true` | no |
+| allow_users_to_change_password | Boolean to enable/disable IAM users to change their own password | `bool` | `true` | no |
+| block_public_access_enabled | Boolean to enable/disable S3 block public access | `bool` | `true` | no |
+| ebs_encryption_enabled | Boolean to enable/disable EBS encryption | `bool` | `true` | no |
+| guardduty_enabled | Boolean to enable/disable GuardDuty | `bool` | `true` | no |
+| hard_expiry | Boolean to enable/disable IAM password policy hard expiry | `bool` | `true` | no |
+| macie_enabled | Boolean to enable/disable Macie | `bool` | `true` | no |
 | max_password_age | Maximum password age in days | `number` | `90` | no |
 | minimum_password_length | Minimum password length | `number` | `14` | no |
 | name | Name of the DynamoDB table and S3 bucket used to store TF state | `string` | `"tf-state-bucket"` | no |
 | password_reuse_prevention | Number of previous passwords to prevent reuse | `number` | `24` | no |
-| require_lowercase_characters | Boolean to enable/disable lowercase characters in IAM password policy | `Bool` | `true` | no |
-| require_numbers | Boolean to enable/disable numbers in IAM password policy | `Bool` | `true` | no |
-| require_symbols | Boolean to enable/disable symbols in IAM password policy | `Bool` | `true` | no |
-| require_uppercase_characters | Boolean to enable/disable uppercase characters in IAM password policy | `Bool` | `true` | no |
-| s3_access_logs_enabled | Boolean to enable/disable S3 access logging | `Bool` | `true` | no |
+| require_lowercase_characters | Boolean to enable/disable lowercase characters in IAM password policy | `bool` | `true` | no |
+| require_numbers | Boolean to enable/disable numbers in IAM password policy | `bool` | `true` | no |
+| require_symbols | Boolean to enable/disable symbols in IAM password policy | `bool` | `true` | no |
+| require_uppercase_characters | Boolean to enable/disable uppercase characters in IAM password policy | `bool` | `true` | no |
+| s3_access_logs_enabled | Boolean to enable/disable S3 access logging | `bool` | `true` | no |
 | security_hub_standards | List of security hub standards to enable | `list(string)` | <pre>[<br>  "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0"<br>]</pre> | no |
-| support_role_enabled | Boolean to enable/disable support role | `Bool` | `true` | no |
+| support_role_enabled | Boolean to enable/disable support role | `bool` | `true` | no |
 | suppress_benchmarks | suppress security benchmarks in security hub | `map(string)` | `{}` | no |
-| tf_state_enabled | Boolean to enable/disable TF state | `Bool` | `true` | no |
+| tf_state_enabled | Boolean to enable/disable TF state | `bool` | `true` | no |
 
 #### Outputs
 
 No outputs.
 <!-- END_TF_DOCS -->
+
+### S3 Access Logging Module
+
+<!-- BEGIN_S3_ACCESS_LOGGING_DOCS -->
+#### Requirements
+
+No requirements.
+
+#### Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
+#### Modules
+
+No modules.
+
+#### Resources
+
+| Name | Type |
+|------|------|
+| [aws_kms_alias.access_logging_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
+| [aws_kms_key.access_logging_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
+| [aws_s3_bucket.access_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.access_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_policy.access_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_public_access_block.access_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.access_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.access_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.access_logging_put_object](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.access_logging_tls](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+
+#### Inputs
+
+No inputs.
+
+#### Outputs
+
+| Name | Description |
+|------|-------------|
+| bucket_name | Name of bucket created for s3 access logging |
+<!-- END_S3_ACCESS_LOGGING_DOCS -->
+
+### Terraform State Module
+
+<!-- BEGIN_TF_STATE_DOCS -->
+#### Requirements
+
+No requirements.
+
+#### Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
+#### Modules
+
+No modules.
+
+#### Resources
+
+| Name | Type |
+|------|------|
+| [aws_dynamodb_table.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table) | resource |
+| [aws_s3_bucket.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_logging.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_logging) | resource |
+| [aws_s3_bucket_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_public_access_block.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
+| [aws_s3_bucket_versioning.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+
+#### Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| access_logging_target_bucket | Name of logging bukcet used for s3 access logging | `string` | `null` | no |
+| name | Name of the DynamoDB table and S3 bucket used to store TF state | `string` | `"tf-state-bucket"` | no |
+
+#### Outputs
+
+| Name | Description |
+|------|-------------|
+| bucket_arn | ARN of bucket created for terraform state |
+| bucket_name | Name of bucket created for terraform state |
+| table_arn | ARN of dynamodb table created for terraform state |
+| table_name | Name of dynamodb table created for terraform state |
+<!-- END_TF_STATE_DOCS -->

@@ -3,10 +3,9 @@
 ## Usage 
 
 ```terraform
-module "tf_state" {
-  source  = "andyscott1547/remote-state/aws"
-  version = "1.2.2"
-  name    = "tf-state-bucket"
+module "account_bootstrap" {
+  source  = "andyscott1547/account-bootstrap/aws"
+  version = "0.1.1"
 }
 ```
 
@@ -28,7 +27,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| tf_state | ../../ | n/a |
+| tf_state |  | n/a |
 
 #### Resources
 
