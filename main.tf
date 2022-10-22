@@ -4,7 +4,7 @@ module "tf_state" {
   count                        = var.tf_state_enabled ? 1 : 0
   source                       = "./modules/tf_state"
   name                         = var.name
-  access_logging_target_bucket = var.s3_access_logs_enabled ? module.s3_access_logging.bucket_name : null
+  access_logging_target_bucket = var.s3_access_logs_enabled ? module.s3_access_logging[0].bucket_name : null
 }
 
 module "s3_access_logging" {
@@ -45,7 +45,7 @@ resource "aws_iam_account_password_policy" "default" {
 resource "aws_iam_role" "support" {
   count              = var.support_role_enabled ? 1 : 0
   name               = "support"
-  assume_role_policy = data.aws_iam_policy_document.assume-role-policy.json
+  assume_role_policy = data.aws_iam_policy_document.assume-role-policy[0].json
 }
 
 data "aws_iam_policy_document" "assume-role-policy" {
@@ -80,7 +80,7 @@ resource "aws_securityhub_account" "default" {
 }
 
 resource "aws_securityhub_standards_subscription" "default" {
-  for_each = var.account_level_security_hub_enabled ? toset(var.security_hub_standards) : {}
+  for_each      = var.account_level_security_hub_enabled ? toset(var.security_hub_standards) : toset([])
   standards_arn = each.value
   depends_on    = [aws_securityhub_account.default]
 }
@@ -105,4 +105,10 @@ resource "aws_guardduty_detector" "default" {
       }
     }
   }
+}
+
+resource "aws_macie2_account" "default" {
+  count                        = var.macie_enabled ? 1 : 0
+  finding_publishing_frequency = "FIFTEEN_MINUTES"
+  status                       = "ENABLED"
 }
