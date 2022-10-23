@@ -266,8 +266,8 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     ]
 
     resources = [
-      "${aws_s3_bucket.this.arn}/*",
-      "${aws_s3_bucket.this.arn}"
+      "${aws_s3_bucket.cloudtrail.arn}/*",
+      "${aws_s3_bucket.cloudtrail.arn}"
     ]
 
     condition {
