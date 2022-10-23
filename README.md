@@ -11,17 +11,22 @@ Basic module to bootstrap a new AWS Account ready for use.
 This Module helps to bootstrap a new AWS account. This will add some baseline configurations like enabling S3 Block Public Access and Default EBS encryption to help secure workloads.
 All resources are optional but by default this module will enable:
 
-* Enable S3 Block Public Access
-* Enable EBS Default Encryption
 * Create a S3 bucket for S3 access logging
 * Create a S3 bucket and DynamoDB table for Terraform State
 * Create a default AWS Support role
+* Enable S3 Block Public Access
+* Enable EBS Default Encryption
 * Enable Security Hub 
 * Enable Guardduty
-* Enable Macies
+* Enable Macie
+* Enable Config
+* Enable Inspector V1
+* Enable Cloudtrail
 * Set a recommended account level password policy
 
 ## References
+
+* https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/welcome.html
 
 ## Terraform-Docs
 
