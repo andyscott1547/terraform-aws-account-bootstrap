@@ -5,7 +5,7 @@
 ```terraform
 module "account_bootstrap" {
   source  = "andyscott1547/account-bootstrap/aws"
-  version = "0.1.4"
+  version = "0.1.5"
 }
 ```
 

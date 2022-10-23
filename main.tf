@@ -83,12 +83,18 @@ resource "aws_securityhub_standards_control" "disabled" {
 
 resource "aws_securityhub_account" "default" {
   count = var.account_level_security_hub_enabled ? 1 : 0
+  depends_on = [
+    module.config
+  ]
 }
 
 resource "aws_securityhub_standards_subscription" "default" {
   for_each      = var.account_level_security_hub_enabled ? toset(var.security_hub_standards) : toset([])
   standards_arn = each.value
-  depends_on    = [aws_securityhub_account.default]
+  depends_on    = [
+    aws_securityhub_account.default,
+    module.config
+  ]
 }
 
 resource "aws_guardduty_detector" "default" {
