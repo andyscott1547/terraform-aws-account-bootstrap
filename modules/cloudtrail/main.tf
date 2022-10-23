@@ -209,6 +209,7 @@ resource "aws_cloudtrail" "global" {
 
 resource "aws_s3_bucket" "cloudtrail" {
   bucket = "cloudtrail-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}"
+  force_destroy = true
   #checkov:skip=CKV_AWS_144:This bucket does not require cross region replication.
   #checkov:skip=CKV_AWS_145:This bucket is encrypted with default aws kms key.
 }
