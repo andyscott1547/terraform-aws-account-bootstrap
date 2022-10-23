@@ -137,3 +137,9 @@ variable "inspector_v1_enabled" {
   type        = bool
   default     = true
 }
+
+variable "cloudtrail_enabled" {
+  description = "Boolean to enable/disable Cloudtrail"
+  type        = bool
+  default     = true
+}
