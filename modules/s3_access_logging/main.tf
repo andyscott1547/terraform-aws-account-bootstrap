@@ -39,7 +39,7 @@ resource "aws_kms_alias" "access_logging_s3" {
 }
 
 resource "aws_s3_bucket" "access_logging" {
-  bucket = "s3-access-logs-${data.aws_caller_identity.current.account_id}"
+  bucket = "access-logs-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}"
   #checkov:skip=CKV_AWS_144:This bucket does not require cross region replication.
   #checkov:skip=CKV_AWS_145:This bucket is encrypted with default aws kms key.
 }

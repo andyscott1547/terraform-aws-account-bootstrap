@@ -1,6 +1,6 @@
 # auto-tfvars
 
-region = "eu-west-1"
+region = "eu-west-2"
 
 tags = {
   "Project"    = "terraform"
