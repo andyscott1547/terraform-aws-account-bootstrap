@@ -8,7 +8,7 @@ resource "aws_config_configuration_recorder_status" "account" {
 
 resource "aws_iam_role_policy_attachment" "account" {
   role       = aws_iam_role.account.name
-  policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AWSConfigServiceRolePolicy"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWS_ConfigRole"
 }
 
 resource "aws_s3_bucket" "account_config" {
