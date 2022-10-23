@@ -128,6 +128,12 @@ variable "macie_enabled" {
 
 variable "config_enabled" {
   description = "Boolean to enable/disable Config, security hub also depends on config being enabled"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
+}
+
+variable "inspector_v1_enabled" {
+  description = "Boolean to enable/disable Inspector V1"
+  type        = bool
+  default     = true
 }

@@ -43,6 +43,7 @@ All resources are optional but by default this module will enable:
 
 | Name | Source | Version |
 |------|--------|---------|
+| config | ./modules/config | n/a |
 | s3_access_logging | ./modules/s3_access_logging | n/a |
 | tf_state | ./modules/tf_state | n/a |
 
@@ -56,6 +57,9 @@ All resources are optional but by default this module will enable:
 | [aws_iam_account_password_policy.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_password_policy) | resource |
 | [aws_iam_role.support](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.support](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_inspector_assessment_target.assessment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/inspector_assessment_target) | resource |
+| [aws_inspector_assessment_template.assessment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/inspector_assessment_template) | resource |
+| [aws_inspector_resource_group.group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/inspector_resource_group) | resource |
 | [aws_macie2_account.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/macie2_account) | resource |
 | [aws_s3_account_public_access_block.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_account_public_access_block) | resource |
 | [aws_securityhub_account.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/securityhub_account) | resource |
@@ -63,6 +67,7 @@ All resources are optional but by default this module will enable:
 | [aws_securityhub_standards_subscription.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/securityhub_standards_subscription) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume-role-policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_inspector_rules_packages.rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/inspector_rules_packages) | data source |
 
 #### Inputs
 
@@ -72,9 +77,11 @@ All resources are optional but by default this module will enable:
 | account_level_security_hub_enabled | Boolean to enable/disable Security Hub at an account level | `bool` | `true` | no |
 | allow_users_to_change_password | Boolean to enable/disable IAM users to change their own password | `bool` | `true` | no |
 | block_public_access_enabled | Boolean to enable/disable S3 block public access | `bool` | `true` | no |
+| config_enabled | Boolean to enable/disable Config, security hub also depends on config being enabled | `bool` | `true` | no |
 | ebs_encryption_enabled | Boolean to enable/disable EBS encryption | `bool` | `true` | no |
 | guardduty_enabled | Boolean to enable/disable GuardDuty | `bool` | `true` | no |
 | hard_expiry | Boolean to enable/disable IAM password policy hard expiry | `bool` | `true` | no |
+| inspector_v1_enabled | Boolean to enable/disable Inspector V1 | `bool` | `true` | no |
 | macie_enabled | Boolean to enable/disable Macie | `bool` | `true` | no |
 | max_password_age | Maximum password age in days | `number` | `90` | no |
 | minimum_password_length | Minimum password length | `number` | `14` | no |
@@ -188,3 +195,52 @@ No modules.
 | table_arn | ARN of dynamodb table created for terraform state |
 | table_name | Name of dynamodb table created for terraform state |
 <!-- END_TF_STATE_DOCS -->
+
+### AWS Config Module
+
+<!-- BEGIN_CONFIG_DOCS -->
+#### Requirements
+
+No requirements.
+
+#### Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
+#### Modules
+
+No modules.
+
+#### Resources
+
+| Name | Type |
+|------|------|
+| [aws_config_configuration_recorder.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder) | resource |
+| [aws_config_configuration_recorder_status.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder_status) | resource |
+| [aws_config_delivery_channel.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_delivery_channel) | resource |
+| [aws_iam_role.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy_attachment.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_s3_bucket.account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_logging.account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_logging) | resource |
+| [aws_s3_bucket_policy.account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_public_access_block.account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
+| [aws_s3_bucket_versioning.account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.https_account_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+
+#### Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| access_logging_target_bucket | Name of logging bukcet used for s3 access logging | `string` | `null` | no |
+
+#### Outputs
+
+No outputs.
+<!-- END_CONFIG_DOCS -->

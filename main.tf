@@ -13,8 +13,8 @@ module "s3_access_logging" {
 }
 
 module "config" {
-  count = var.config_enabled || var.account_level_security_hub_enabled ? 1 : 0
-  source = "./modules/config"
+  count                        = var.config_enabled || var.account_level_security_hub_enabled ? 1 : 0
+  source                       = "./modules/config"
   access_logging_target_bucket = var.s3_access_logs_enabled ? module.s3_access_logging[0].bucket_name : null
 }
 
@@ -91,7 +91,7 @@ resource "aws_securityhub_account" "default" {
 resource "aws_securityhub_standards_subscription" "default" {
   for_each      = var.account_level_security_hub_enabled ? toset(var.security_hub_standards) : toset([])
   standards_arn = each.value
-  depends_on    = [
+  depends_on = [
     aws_securityhub_account.default,
     module.config
   ]
@@ -123,4 +123,26 @@ resource "aws_macie2_account" "default" {
   count                        = var.macie_enabled ? 1 : 0
   finding_publishing_frequency = "FIFTEEN_MINUTES"
   status                       = "ENABLED"
+}
+
+resource "aws_inspector_resource_group" "group" {
+  count = var.inspector_v1_enabled ? 1 : 0
+  tags = {
+    inspector_enabled = "true"
+  }
+}
+
+resource "aws_inspector_assessment_target" "assessment" {
+  count              = var.inspector_v1_enabled ? 1 : 0
+  name               = "account-inspector_v1-${data.aws_caller_identity.current.account_id}"
+  resource_group_arn = aws_inspector_resource_group.group[0].arn
+}
+
+resource "aws_inspector_assessment_template" "assessment" {
+  count      = var.inspector_v1_enabled ? 1 : 0
+  name       = "account-inspector_v1-${data.aws_caller_identity.current.account_id}"
+  target_arn = aws_inspector_assessment_target.assessment[0].arn
+  duration   = "60"
+
+  rules_package_arns = data.aws_inspector_rules_packages.rules.arns
 }

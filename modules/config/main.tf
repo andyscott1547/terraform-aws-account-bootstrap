@@ -93,7 +93,7 @@ resource "aws_config_configuration_recorder" "account" {
 }
 
 resource "aws_iam_role" "account" {
-  name = "example-awsconfig"
+  name = "account-config-${data.aws_caller_identity.current.account_id}"
 
   assume_role_policy = <<POLICY
 {
@@ -113,7 +113,7 @@ POLICY
 }
 
 resource "aws_iam_role_policy" "account" {
-  name = "awsconfig-example"
+  name = "account-config-policy-${data.aws_caller_identity.current.account_id}"
   role = aws_iam_role.account.id
 
   policy = <<POLICY
