@@ -18,6 +18,12 @@ module "config" {
   access_logging_target_bucket = var.s3_access_logs_enabled ? module.s3_access_logging[0].bucket_name : null
 }
 
+module "cloudtrail" {
+  count                        = var.cloudtrail_enabled ? 1 : 0
+  source                       = "./modules/cloudtrail"
+  access_logging_target_bucket = var.s3_access_logs_enabled ? module.s3_access_logging[0].bucket_name : null
+}
+
 resource "aws_accessanalyzer_analyzer" "default" {
   count         = var.access_analyzer_enabled ? 1 : 0
   analyzer_name = "analyzer"

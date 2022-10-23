@@ -90,6 +90,10 @@ resource "aws_config_delivery_channel" "account" {
 resource "aws_config_configuration_recorder" "account" {
   name     = "account-config-${data.aws_caller_identity.current.account_id}"
   role_arn = aws_iam_role.account.arn
+  recording_group {
+    all_supported                 = "true"
+    include_global_resource_types = "true"
+  }
 }
 
 resource "aws_iam_role" "account" {
