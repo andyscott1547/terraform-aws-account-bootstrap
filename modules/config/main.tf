@@ -70,8 +70,8 @@ data "aws_iam_policy_document" "https_account_config" {
     ]
 
     resources = [
-      "${aws_s3_bucket.this.arn}/*",
-      "${aws_s3_bucket.this.arn}"
+      "${aws_s3_bucket.account_config.arn}/*",
+      "${aws_s3_bucket.account_config.arn}"
     ]
 
     condition {
@@ -84,7 +84,7 @@ data "aws_iam_policy_document" "https_account_config" {
 
 resource "aws_config_delivery_channel" "account" {
   name           = "account-config-${data.aws_caller_identity.current.account_id}"
-  s3_bucket_name = aws_s3_bucket.b.bucket
+  s3_bucket_name = aws_s3_bucket.account_config.bucket
 }
 
 resource "aws_config_configuration_recorder" "account" {
