@@ -78,6 +78,7 @@ All resources are optional but by default this module will enable:
 | account_level_security_hub_enabled | Boolean to enable/disable Security Hub at an account level | `bool` | `true` | no |
 | allow_users_to_change_password | Boolean to enable/disable IAM users to change their own password | `bool` | `true` | no |
 | block_public_access_enabled | Boolean to enable/disable S3 block public access | `bool` | `true` | no |
+| cloudtrail_enabled | Boolean to enable/disable Cloudtrail | `bool` | `true` | no |
 | config_enabled | Boolean to enable/disable Config, security hub also depends on config being enabled | `bool` | `true` | no |
 | ebs_encryption_enabled | Boolean to enable/disable EBS encryption | `bool` | `true` | no |
 | guardduty_enabled | Boolean to enable/disable GuardDuty | `bool` | `true` | no |
@@ -179,6 +180,7 @@ No modules.
 | [aws_s3_bucket_versioning.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 #### Inputs
 

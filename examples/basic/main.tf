@@ -2,5 +2,5 @@
 
 module "account-bootstrap" {
   source  = "andyscott1547/account-bootstrap/aws"
-  version = "0.1.14"
+  version = "1.0.0"
 }
