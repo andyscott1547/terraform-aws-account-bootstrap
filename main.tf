@@ -148,7 +148,7 @@ resource "aws_inspector_assessment_template" "assessment" {
   count      = var.inspector_v1_enabled ? 1 : 0
   name       = "account-inspector_v1-${data.aws_caller_identity.current.account_id}"
   target_arn = aws_inspector_assessment_target.assessment[0].arn
-  duration   = "60"
+  duration   = "180"
 
   rules_package_arns = data.aws_inspector_rules_packages.rules.arns
 }
