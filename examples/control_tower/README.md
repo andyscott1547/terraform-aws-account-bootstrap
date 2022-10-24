@@ -1,11 +1,17 @@
-# Basic Example
+# Control Tower Example
 
 ## Usage 
 
 ```terraform
 module "account_bootstrap" {
-  source  = "andyscott1547/account-bootstrap/aws"
-  version = "1.1.0"
+  source                             = "andyscott1547/account-bootstrap/aws"
+  version                            = "1.1.0"
+  account_level_security_hub_enabled = false
+  guardduty_enabled                  = false
+  macie_enabled                      = false
+  config_enabled                     = false
+  inspector_v1_enabled               = false
+  cloudtrail_enabled                 = false
 }
 ```
 
