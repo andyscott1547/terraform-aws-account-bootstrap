@@ -5,7 +5,7 @@
 ```terraform
 module "account_bootstrap" {
   source  = "andyscott1547/account-bootstrap/aws"
-  version = "1.1.1"
+  version = "1.1.2"
 }
 ```
 
@@ -27,7 +27,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| account-bootstrap | andyscott1547/account-bootstrap/aws | 1.1.1 |
+| account-bootstrap | andyscott1547/account-bootstrap/aws | 1.1.2 |
 
 #### Resources
 
