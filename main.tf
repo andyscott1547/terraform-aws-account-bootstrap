@@ -13,7 +13,7 @@ module "s3_access_logging" {
 }
 
 module "config" {
-  count                        = var.config_enabled || var.account_level_security_hub_enabled ? 1 : 0
+  count                        = var.config_enabled || security_hub_enabled ? 1 : 0
   source                       = "./modules/config"
   access_logging_target_bucket = var.s3_access_logs_enabled ? module.s3_access_logging[0].bucket_name : null
 }
@@ -88,14 +88,14 @@ resource "aws_securityhub_standards_control" "disabled" {
 }
 
 resource "aws_securityhub_account" "default" {
-  count = var.account_level_security_hub_enabled ? 1 : 0
+  count = var.security_hub_enabled ? 1 : 0
   depends_on = [
     module.config
   ]
 }
 
 resource "aws_securityhub_standards_subscription" "default" {
-  for_each      = var.account_level_security_hub_enabled ? toset(var.security_hub_standards) : toset([])
+  for_each      = var.security_hub_enabled ? toset(var.security_hub_standards) : toset([])
   standards_arn = each.value
   depends_on = [
     aws_securityhub_account.default,

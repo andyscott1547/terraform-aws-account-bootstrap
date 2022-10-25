@@ -80,7 +80,6 @@ All resources are optional but by default this module will enable:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | access_analyzer_enabled | Boolean to enable/disable AWS Access Analyzer | `bool` | `true` | no |
-| account_level_security_hub_enabled | Boolean to enable/disable Security Hub at an account level | `bool` | `true` | no |
 | allow_users_to_change_password | Boolean to enable/disable IAM users to change their own password | `bool` | `true` | no |
 | block_public_access_enabled | Boolean to enable/disable S3 block public access | `bool` | `true` | no |
 | cloudtrail_enabled | Boolean to enable/disable Cloudtrail | `bool` | `true` | no |
@@ -99,6 +98,7 @@ All resources are optional but by default this module will enable:
 | require_symbols | Boolean to enable/disable symbols in IAM password policy | `bool` | `true` | no |
 | require_uppercase_characters | Boolean to enable/disable uppercase characters in IAM password policy | `bool` | `true` | no |
 | s3_access_logs_enabled | Boolean to enable/disable S3 access logging | `bool` | `true` | no |
+| security_hub_enabled | Boolean to enable/disable Security Hub at an account level | `bool` | `true` | no |
 | security_hub_standards | List of security hub standards to enable | `list(string)` | <pre>[<br>  "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0"<br>]</pre> | no |
 | support_role_enabled | Boolean to enable/disable support role | `bool` | `true` | no |
 | suppress_benchmarks | suppress security benchmarks in security hub | `map(string)` | `{}` | no |

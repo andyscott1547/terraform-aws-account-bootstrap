@@ -96,7 +96,7 @@ variable "suppress_benchmarks" {
   default     = {}
 }
 
-variable "account_level_security_hub_enabled" {
+variable "security_hub_enabled" {
   description = "Boolean to enable/disable Security Hub at an account level"
   type        = bool
   default     = true
