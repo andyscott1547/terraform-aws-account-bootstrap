@@ -13,7 +13,7 @@ module "s3_access_logging" {
 }
 
 module "config" {
-  count                        = var.config_enabled || security_hub_enabled ? 1 : 0
+  count                        = var.config_enabled || var.security_hub_enabled ? 1 : 0
   source                       = "./modules/config"
   access_logging_target_bucket = var.s3_access_logs_enabled ? module.s3_access_logging[0].bucket_name : null
 }
