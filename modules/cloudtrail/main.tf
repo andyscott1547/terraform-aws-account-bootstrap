@@ -214,10 +214,10 @@ resource "aws_s3_bucket" "cloudtrail" {
   #checkov:skip=CKV_AWS_145:This bucket is encrypted with default aws kms key.
 }
 
-resource "aws_s3_bucket_acl" "cloudtrail" {
-  bucket = aws_s3_bucket.cloudtrail.id
-  acl    = "private"
-}
+# resource "aws_s3_bucket_acl" "cloudtrail" {
+#   bucket = aws_s3_bucket.cloudtrail.id
+#   acl    = "private"
+# }
 
 resource "aws_s3_bucket_logging" "cloudtrail" {
   count         = var.access_logging_target_bucket != null ? 1 : 0

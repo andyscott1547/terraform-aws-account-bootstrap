@@ -53,10 +53,10 @@ resource "aws_s3_bucket_public_access_block" "access_logging" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_acl" "access_logging" {
-  bucket = aws_s3_bucket.access_logging.id
-  acl    = "private"
-}
+# resource "aws_s3_bucket_acl" "access_logging" {
+#   bucket = aws_s3_bucket.access_logging.id
+#   acl    = "private"
+# }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "access_logging" {
   bucket = aws_s3_bucket.access_logging.bucket

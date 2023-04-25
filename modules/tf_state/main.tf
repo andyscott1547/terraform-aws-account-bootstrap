@@ -6,10 +6,10 @@ resource "aws_s3_bucket" "this" {
   #checkov:skip=CKV_AWS_145:This bucket is encrypted with default aws kms key.
 }
 
-resource "aws_s3_bucket_acl" "this" {
-  bucket = aws_s3_bucket.this.id
-  acl    = "private"
-}
+# resource "aws_s3_bucket_acl" "this" {
+#   bucket = aws_s3_bucket.this.id
+#   acl    = "private"
+# }
 
 resource "aws_s3_bucket_logging" "this" {
   count         = var.access_logging_target_bucket != null ? 1 : 0

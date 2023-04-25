@@ -18,10 +18,10 @@ resource "aws_s3_bucket" "account_config" {
   #checkov:skip=CKV_AWS_145:This bucket is encrypted with default aws kms key.
 }
 
-resource "aws_s3_bucket_acl" "account_config" {
-  bucket = aws_s3_bucket.account_config.id
-  acl    = "private"
-}
+# resource "aws_s3_bucket_acl" "account_config" {
+#   bucket = aws_s3_bucket.account_config.id
+#   acl    = "private"
+# }
 
 resource "aws_s3_bucket_logging" "account_config" {
   count         = var.access_logging_target_bucket != null ? 1 : 0
